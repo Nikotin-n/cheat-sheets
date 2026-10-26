@@ -1,26 +1,26 @@
 # 🔎 Advanced Google Dorking & Reconnaissance Methodology
 
-## 📌 Introduction & Methodology
-Google Dorking (or Google Hacking) is a passive reconnaissance technique based on leveraging advanced search engine operators to uncover sensitive data, hidden directories, unprotected configuration files, and vulnerable endpoints without directly interacting with the target infrastructure (i.e., without sending requests to the target's web server).
+## 📌 Introduction & Theoretical Framework
+Google Dorking (Google Hacking) is a fundamental passive reconnaissance methodology. It leverages structural search operators to identify exposed sensitive data, misconfigured security headers, public backup files, and unlinked administrative panels indexed by search engine crawlers. Because all queries are processed by Google's infrastructure, this process remains entirely passive and undetectable by the target's direct server logs.
 
 ---
 
-## 🛠️ Core Syntax & Operators
+## 🛠️ Core Syntax & Operator Reference
 
-| Operator | Purpose & Description | Usage Example |
+| Operator | Syntax Format | Operational Purpose |
 | :--- | :--- | :--- |
-| `site:` | Restricts search results to a specific domain or subdomain. | `site:subdomain.example.com` |
-| `filetype:` / `ext:` | Filters results by specific file extension (PDF, DOCX, SQL, ENV, etc.). | `ext:log OR ext:env` |
-| `inurl:` | Searches for a specific string within the URL path. | `inurl:api/v1` |
-| `intitle:` | Finds matches within the HTML `<title>` tag of a webpage. | `intitle:"Dashboard"` |
-| `intext:` / `allintext:` | Searches for specific keywords within the body text of a webpage. | `intext:"DB_PASSWORD"` |
-| `cache:` | Displays Google's cached version of a webpage (useful if the site is offline). | `cache:example.com` |
+| `site:` | `site:example.com` | Restricts search scope exclusively to the specified domain or TLD. |
+| `filetype:` / `ext:` | `ext:env` / `filetype:pdf` | Filters results by file extension (e.g., configuration, archives, documents). |
+| `inurl:` | `inurl:api/v1` | Identifies specific subpaths, directories, or parameters within the URL string. |
+| `intitle:` | `intitle:"Index of"` | Matches specific strings within the HTML `<title>` tag of indexed pages. |
+| `intext:` | `intext:"DB_PASSWORD"` | Searches for target strings anywhere within the rendered text body of the page. |
+| `cache:` | `cache:example.com` | Displays Google’s cached snapshot of a page (useful for offline/removed pages). |
 
 ---
 
-## 🚀 Professional Dorks for Vulnerability & Leak Discovery
+## 🚀 Advanced Google Dork Scenarios & Queries
 
-### 1. Identifying Sensitive Data & Configuration Leaks (Information Disclosure)
-Search for environment configuration files, hardcoded credentials, and log files indexed by accident:
+### 1. Information Disclosure & Sensitive Configuration Files
+Uncovering environment configuration files, database credentials, and error log dumps:
 ```text
-site:example.com (ext:env OR ext:yaml OR ext:json OR ext:xml OR ext:ini) "DB_PASSWORD"
+site:example.com (ext:env OR ext:yaml OR ext:ini OR ext:json OR ext:xml) "DB_PASSWORD"
